@@ -1,0 +1,16 @@
+# 1. Install anaconda or miniconda
+# 2. Follow following commands to create an environment for this work
+
+conda create --name Dam python=3.10
+conda activate Dam
+conda config --add channels conda-forge
+conda install ase
+conda install lammps
+conda install pandas
+conda install dftd3-python
+conda install scikit-learn
+
+# 3. This folder contains class and functions of Dam package, go through these to know more. These are written as a combination of python and unix commands. Everything is desined to run on a single core.
+ 
+# 4. Now go to examples folder and run examples. Check Instructions.sh file in each example.
+
