@@ -1,0 +1,14 @@
+#This line is just a comment: File wrote by Abhishek
+
+#Required
+
+rcutfac 4.0
+twojmax 8
+
+#optional
+
+rfac0 0.9539387603447764
+rmin0  0 
+quadraticflag  0 
+bzeroflag  1 
+switchflag 1
