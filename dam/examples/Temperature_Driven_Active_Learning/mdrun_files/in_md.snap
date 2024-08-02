@@ -1,0 +1,33 @@
+# ---------- Initialize Simulation --------------------- 
+units metal
+dimension 3 
+boundary p p p 
+atom_style full 
+# ---------- Create Atoms --------------------- 
+read_data data.snap
+#-------------------------------------------------------
+pair_style snap
+pair_coeff * * snapcoeff snapparam C H O Zn   ##H1b CH3, H1a-C3b, C4b-C3a
+#------------------------------------------------------
+thermo          1
+thermo_style    custom  step temp etotal epair ke pe evdwl pxx vol
+thermo_modify   norm no
+dump ef all custom Nxxx dump.lammpstrj id type xs ys zs  # To print trajectory
+
+variable s equal step
+variable t equal temp
+variable p equal pe
+variable k equal ke
+variable e equal etotal
+variable v equal vol
+fix extra all print 1 "$s $t $p $k $e $v" file "sim_details.txt" screen no
+
+minimize 1e-6 1e-4 100 10000
+
+run_style verlet
+timestep 0.0005
+velocity all create 300 624 rot yes mom yes dist gaussian
+#fix aNPT all npt temp 100 100 $(100.0*dt) tchain 3 aniso 1.0 1.0 $(100.0*dt)
+fix aNPT all npt temp 300 300 $(20.0*dt) tchain 3 tri 1.0 1.0 $(40.0*dt)
+#fix aNVT all nvt temp 300 300 $(20.0*dt) tchain 3
+
